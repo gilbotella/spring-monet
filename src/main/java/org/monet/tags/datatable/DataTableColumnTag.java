@@ -59,16 +59,16 @@ public class DataTableColumnTag extends HtmlEscapingAwareTag {
 	// Atributo title para el tootltip
 	protected String title;
 
-	//Atributo cssClass
+	// Atributo cssClass
 	protected String cssClass;
 
-	//Atributo cssClass
+	// Atributo cssClass
 	protected String cssClassColumn;
 
 	// Atributo name de la variable seleccionada por el radio button
 	protected String nameRadiobutton;
 
-	//Componente padre donde se volcará la información.
+	// Componente padre donde se volcará la información.
 	private DataTableTag dataTable;
 
 	/**
@@ -96,16 +96,16 @@ public class DataTableColumnTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Al inicio del tag, pintamos la cabecera de la columna y guardamos los datos para renderizar la tabla al final.
-	 *
+	 * 
 	 * @return Continúa con el resto de la página
-	 *
+	 * 
 	 * @throws IOException Error al renderizar la tabla.
 	 */
 	@Override
 	public int doStartTagInternal() throws IOException {
 		Assert.notNull(findAncestorWithClass(this, DataTableHeadTag.class), "El tag dtColumn debe ser descendiente del tag dtHead");
 
-		dataTable = (DataTableTag)findAncestorWithClass(this, DataTableTag.class);
+		dataTable = (DataTableTag) findAncestorWithClass(this, DataTableTag.class);
 
 		Assert.notNull(dataTable, "El tag dtColumn debe ser descendiente del tag datatable");
 
@@ -128,7 +128,7 @@ public class DataTableColumnTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Establece el estilo css de la cabecera de la columna.
-	 *
+	 * 
 	 * @param cssClass Clase css de la cabecera de la columna.
 	 */
 	public void setCssClass(String cssClass) throws JspException {
@@ -137,9 +137,9 @@ public class DataTableColumnTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Establece el estilo de los datos de la columna.
-	 *
+	 * 
 	 * @param cssClassColumn Clase css de los datos de la columna.
-	 *
+	 * 
 	 * @throws JspException Error al evaluar el valor.
 	 */
 	public void setCssClassColumn(String cssClassColumn) throws JspException {
@@ -148,9 +148,9 @@ public class DataTableColumnTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Establece el nombre de la variable del radiobotón en una columna de este tipo.
-	 *
+	 * 
 	 * @param nameRadiobutton Nombre del radiobotón en una columna de radiobotones.
-	 *
+	 * 
 	 * @throws JspException Error al evaluar el valor.
 	 */
 	public void setNameRadiobutton(String nameRadiobutton) throws JspException {
@@ -159,9 +159,9 @@ public class DataTableColumnTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Establece el flag columna en la que se puede buscar.
-	 *
+	 * 
 	 * @param buscar true, se permitirá buscar en la columna; false, en otro caso.
-	 *
+	 * 
 	 * @throws JspException Error al evaluar el valor.
 	 */
 	public void setSearchable(String buscar) throws JspException {
@@ -170,9 +170,9 @@ public class DataTableColumnTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Establece el flag de ordenación. True, será una columna ordenable; false, no.
-	 *
+	 * 
 	 * @param ordenar Flag que permite ordenar la columna.
-	 *
+	 * 
 	 * @throws JspException Error al evaluar el valor.
 	 */
 	public void setSortable(String ordenar) throws JspException {
@@ -181,9 +181,9 @@ public class DataTableColumnTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Establece el atributo title de la columna.
-	 *
+	 * 
 	 * @param title El atributo title de la columna.
-	 *
+	 * 
 	 * @throws JspException Error al evaluar el valor.
 	 */
 	public void setTitle(String title) throws JspException {
@@ -192,9 +192,9 @@ public class DataTableColumnTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Establece el falg de columna visible o no.
-	 *
+	 * 
 	 * @param visible Es una columna visible; false, no lo es.
-	 *
+	 * 
 	 * @throws JspException Error al evaluar el valor.
 	 */
 	public void setVisible(String visible) throws JspException {

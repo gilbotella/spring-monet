@@ -52,14 +52,14 @@ public class DataTableHeadTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Al inicio del tab, abrimos la fila de la cabecera de la tabla.
-	 *
+	 * 
 	 * @return Continúa evaluando la cabecera con las columnas.
-	 *
+	 * 
 	 * @throws IOException Error al renderizar la cabecera.
 	 */
 	@Override
 	public int doStartTagInternal() throws IOException {
-		dataTable = (DataTableTag)findAncestorWithClass(this, DataTableTag.class);
+		dataTable = (DataTableTag) findAncestorWithClass(this, DataTableTag.class);
 
 		Assert.notNull(dataTable, "El tag dtHead debe ser descendiente del tag datatable");
 
@@ -73,9 +73,9 @@ public class DataTableHeadTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Establece la ordenación por defecto.
-	 *
+	 * 
 	 * @param defOrd Ordenación por defecto.
-	 *
+	 * 
 	 * @throws JspException Error al evaluar el valor.
 	 */
 	public void setDefOrd(String defOrd) throws JspException {
@@ -84,9 +84,9 @@ public class DataTableHeadTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Establece la columna que está ordenada por defecto.
-	 *
+	 * 
 	 * @param defOrdCol Columna ordenada por defecto.
-	 *
+	 * 
 	 * @throws JspException Error al evaluar el valor.
 	 */
 	public void setDefOrdCol(String defOrdCol) throws JspException {

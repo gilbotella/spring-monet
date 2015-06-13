@@ -17,7 +17,7 @@ public class ColumnInfo implements Serializable {
 
 	/**
 	 * Crea unos nuevos datos para las columnas de una tabla.
-	 *
+	 * 
 	 * @param cssClassColumn Atributo class de la columna.
 	 * @param buscar Flag que permite buscar en la columna o no.
 	 * @param ordenar Flag que hace a la columna ordenable o no.
@@ -26,7 +26,7 @@ public class ColumnInfo implements Serializable {
 	 * @param radiobutton Flag que indica que la columna es de tiporadiobutt on.
 	 */
 	public ColumnInfo(String cssClassColumn, boolean buscar, boolean ordenar, boolean visible, boolean details, boolean radiobutton,
-	                  String nameRadiobutton) {
+			String nameRadiobutton) {
 		this.cssClassColumn = cssClassColumn;
 		this.buscar = buscar;
 		this.ordenar = ordenar;
@@ -38,7 +38,7 @@ public class ColumnInfo implements Serializable {
 
 	/**
 	 * Obtiene el class de la columna.
-	 *
+	 * 
 	 * @return Atributo class para la columna.
 	 */
 	public String getCssClassColumn() {
@@ -47,7 +47,7 @@ public class ColumnInfo implements Serializable {
 
 	/**
 	 * Obtiene el name de la variable asociada al radiobutton.
-	 *
+	 * 
 	 * @return Nombre de la variable asociada al radiobutton.
 	 */
 	public String getNameRadiobutton() {
@@ -56,7 +56,7 @@ public class ColumnInfo implements Serializable {
 
 	/**
 	 * Obtiene el flag de buscar en la columna.
-	 *
+	 * 
 	 * @return True, se buscará en la columna; false, no.
 	 */
 	public boolean isBuscar() {
@@ -65,7 +65,7 @@ public class ColumnInfo implements Serializable {
 
 	/**
 	 * Obtiene el flag de si la columna es un desplegable de detalle.
-	 *
+	 * 
 	 * @return True, si la columna es de detalle; false, en otro caso.
 	 */
 	public boolean isDetails() {
@@ -74,7 +74,7 @@ public class ColumnInfo implements Serializable {
 
 	/**
 	 * Obtiene el flag de ordenar la columna.
-	 *
+	 * 
 	 * @return True, se ordenará la columna; false, no.
 	 */
 	public boolean isOrdenar() {
@@ -83,7 +83,7 @@ public class ColumnInfo implements Serializable {
 
 	/**
 	 * Obtiene el flag de si la columna es un radio botón.
-	 *
+	 * 
 	 * @return True, si la columna es radiobotón; false, en otro caso.
 	 */
 	public boolean isRadiobutton() {
@@ -92,7 +92,7 @@ public class ColumnInfo implements Serializable {
 
 	/**
 	 * Obtiene el flag de columna visible.
-	 *
+	 * 
 	 * @return True, columna visible; false, no.
 	 */
 	public boolean isVisible() {

@@ -25,13 +25,9 @@ public class FreemarkerParser {
 			try {
 				freemarkerParser = new FreemarkerParser();
 			} catch (IOException e) {
-				log.warn(
-						"Al crear la singleton de configuración de freemarkerParser",
-						e);
+				log.warn("Al crear la singleton de configuración de freemarkerParser", e);
 			} catch (TemplateException e) {
-				log.warn(
-						"Al crear la singleton de configuración de freemarkerParser",
-						e);
+				log.warn("Al crear la singleton de configuración de freemarkerParser", e);
 			}
 		}
 		return freemarkerParser;
@@ -40,8 +36,7 @@ public class FreemarkerParser {
 	private Configuration configuration;
 
 	/**
-	 * Constructor privado de la singleton a partir del folder donde están los
-	 * templates.
+	 * Constructor privado de la singleton a partir del folder donde están los templates.
 	 * 
 	 * @throws IOException Error en el folder de templates.
 	 * @throws TemplateException Error al crear la configuración.

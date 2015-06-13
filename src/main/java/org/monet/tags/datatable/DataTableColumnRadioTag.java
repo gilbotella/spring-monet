@@ -11,9 +11,9 @@ public class DataTableColumnRadioTag extends DataTableColumnTag {
 
 	/**
 	 * Antes de pintar la columna, ponemos valores fijos.
-	 *
+	 * 
 	 * @return <code>EVAL_BODY_INCLUDE</code>, es decir, que evalúe el contenido.
-	 *
+	 * 
 	 * @throws IOException Al renderizar la columna.
 	 */
 	@Override

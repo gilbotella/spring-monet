@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.spring-monet</groupId>
 	<artifactId>monet</artifactId>
-	<version>1.0.0.M1</version>
+	<version>1.0.0</version>
 	<name>monet</name>
 	<description>Components to render pages using jQuery issues</description>
 	<properties>

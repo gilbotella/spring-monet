@@ -60,33 +60,33 @@ public class DataTableTag extends HtmlEscapingAwareTag {
 	// Atributo con el summary de la tabla
 	protected String summary;
 
-	/// Atributo con los datos de la tabla
+	// / Atributo con los datos de la tabla
 	protected Object jsonData;
 
-	/// Atributo flag guardar el estado
+	// / Atributo flag guardar el estado
 	protected Boolean saveState = Boolean.TRUE;
 
 	// Atributo flag para poder seleccionar el rango de paginación
 	protected Boolean lengthChange = Boolean.TRUE;
 
-	/// Atributo flag para mostrar o no el filtro
-	protected Boolean withFilter= Boolean.TRUE;
+	// / Atributo flag para mostrar o no el filtro
+	protected Boolean withFilter = Boolean.TRUE;
 
-	//Columna ordenada por defecto. Este dato lo tiene el <code>DataTableHeadTag</code>
+	// Columna ordenada por defecto. Este dato lo tiene el <code>DataTableHeadTag</code>
 	private Integer defOrdCol = -1;
 
-	//Ordenación ascendente o descendente. Este dato lo tiene el <code>DataTableHeadTag</code>
+	// Ordenación ascendente o descendente. Este dato lo tiene el <code>DataTableHeadTag</code>
 	private String defOrd;
 
-	//Datos de las columnas. Lo irá rellenando el <code>DataTableColumnTag</code>. 
+	// Datos de las columnas. Lo irá rellenando el <code>DataTableColumnTag</code>.
 	private List<ColumnInfo> columnas = new ArrayList<ColumnInfo>();
 
-	//Datos de los botones. Lo irá rellenando el <code>DataTableButonTag</code>. 
+	// Datos de los botones. Lo irá rellenando el <code>DataTableButonTag</code>.
 	private List<ButtonInfo> botones = new ArrayList<ButtonInfo>();
 
 	/**
 	 * Añade la información de los botones.
-	 *
+	 * 
 	 * @param label El label del botón.
 	 * @param function La función que se ejecutará al hacer click.
 	 */
@@ -96,7 +96,7 @@ public class DataTableTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Añade la información de una columna.
-	 *
+	 * 
 	 * @param cssClassColumn Clase de la columna.
 	 * @param buscar Flag para permitir buscar por la columna.
 	 * @param ordenar Flag para permitir ordenar por la columna.
@@ -105,16 +105,16 @@ public class DataTableTag extends HtmlEscapingAwareTag {
 	 * @param radiobutton Falg para columna de radiobotón o no.
 	 * @param nameRadiobutton Nombre del radiobotón si es una columna de radiobotón.
 	 */
-	public void addColumnInfo(String cssClassColumn, boolean buscar, boolean ordenar, boolean visible, boolean details, boolean radiobutton,
-	                          String nameRadiobutton) {
+	public void addColumnInfo(String cssClassColumn, boolean buscar, boolean ordenar, boolean visible, boolean details,
+			boolean radiobutton, String nameRadiobutton) {
 		columnas.add(new ColumnInfo(cssClassColumn, buscar, ordenar, visible, details, radiobutton, nameRadiobutton));
 	}
 
 	/**
 	 * Cierra el bloque '<code>table</code>'.
-	 *
+	 * 
 	 * @return Flag para el renderizado del resto de tags internos.
-	 *
+	 * 
 	 * @throws JspException Error al renderizar la salida de la tabla.
 	 */
 	@Override
@@ -148,9 +148,9 @@ public class DataTableTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Método para el inicio del tag.
-	 *
+	 * 
 	 * @return Flag para continuar con el renderizado del resto de componentes internos.
-	 *
+	 * 
 	 * @throws IOException Error al renderizar la salida de la tabla.
 	 */
 	@Override
@@ -171,7 +171,7 @@ public class DataTableTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Establece la ordenación por defecto: asc o desc. No puede ser una expresión regular.
-	 *
+	 * 
 	 * @param defOrd Ordenación por defecto.
 	 */
 	public void setDefOrd(String defOrd) {
@@ -180,7 +180,7 @@ public class DataTableTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Establece la columna ordenada por defecto. No puede ser una expresión regular.
-	 *
+	 * 
 	 * @param defOrdCol Columna ordenada por defecto.
 	 */
 	public void setDefOrdCol(Integer defOrdCol) {
@@ -189,9 +189,9 @@ public class DataTableTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Establece los datos de la tabla en formato json.
-	 *
+	 * 
 	 * @param jsonData Datos de la tabla en formato json.
-	 *
+	 * 
 	 * @throws JspException Error al evaluar la expresión regular que nos da como resultado los datos de la tabla.
 	 */
 	public void setJsonData(String jsonData) throws JspException {
@@ -200,9 +200,9 @@ public class DataTableTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Flag para que el usuario pueda cambiar la paginación o no.
-	 *
+	 * 
 	 * @param lengthChange Flag para mostrar el desplegable de paginación.
-	 *
+	 * 
 	 * @throws JspException Error al evaluar la expresión regular que nos da como resultado el valor.
 	 */
 	public void setLengthChange(String lengthChange) throws JspException {
@@ -211,9 +211,9 @@ public class DataTableTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Flag para que activar el filtro de la tabla.
-	 *
+	 * 
 	 * @param withFilter Flag para mostrar el filtro de la tabla.
-	 *
+	 * 
 	 * @throws JspException Error al evaluar la expresión regular que nos da como resultado el valor.
 	 */
 	public void setWithFilter(String withFilrer) throws JspException {
@@ -222,9 +222,9 @@ public class DataTableTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Establece la función que se ejecutará en el pintado del detalle de una fila.
-	 *
+	 * 
 	 * @param onFormatDetails Función que se ejecutará en el pintado del detalle de una fila.
-	 *
+	 * 
 	 * @throws JspException Error al evaluar la expresión regular que nos da como resultado el valor.
 	 */
 	public void setOnFormatDetails(String onFormatDetails) throws JspException {
@@ -233,9 +233,9 @@ public class DataTableTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Establece la función inicial que ejecutará la tabla.
-	 *
+	 * 
 	 * @param onInit Función que se ejecutará al inicio.
-	 *
+	 * 
 	 * @throws JspException Error al evaluar la expresión regular que nos da como resultado el valor.
 	 */
 	public void setOnInit(String onInit) throws JspException {
@@ -244,9 +244,9 @@ public class DataTableTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Establece la función que se ejecutará en el pintado de cada fila.
-	 *
+	 * 
 	 * @param onRowDraw Función que se ejecutará en el pintado de cada fila.
-	 *
+	 * 
 	 * @throws JspException Error al evaluar la expresión regular que nos da como resultado el valor.
 	 */
 	public void setOnRowDraw(String onRowDraw) throws JspException {
@@ -255,9 +255,9 @@ public class DataTableTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Establece el flag para guardar en una cookie el estado de la tabla para la siguiente vez.
-	 *
+	 * 
 	 * @param saveState True, conserva el estado de la tabla (ordenación,...); false, no lo hace.
-	 *
+	 * 
 	 * @throws JspException Error al evaluar la expresión regular que nos da como resultado el valor.
 	 */
 	public void setSaveState(String saveState) throws JspException {
@@ -266,9 +266,9 @@ public class DataTableTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Establece el summary de la tabla.
-	 *
+	 * 
 	 * @param summary Texto descriptivo resumen de la información de la tabla.
-	 *
+	 * 
 	 * @throws JspException Error al evaluar la expresión regular que nos da como resultado el valor.
 	 */
 	public void setSummary(String summary) throws JspException {
@@ -277,9 +277,9 @@ public class DataTableTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Obtiene la información de las columnas en formato json.
-	 *
+	 * 
 	 * @return Json con la información de las columnas.
-	 *
+	 * 
 	 * @throws IOException Error al serializar a json la información de las columnas.
 	 */
 	private String getColumnsJson() throws IOException {
@@ -293,11 +293,11 @@ public class DataTableTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Obtenemos el renderizado de la lista de botones al pie de la tabla.
-	 *
+	 * 
 	 * @return Salida json para incluir en el datatable botones al pie.
 	 */
 	private String getTableTools() throws JspException {
-		//Voy a buscar la columna que es radiobotón.
+		// Voy a buscar la columna que es radiobotón.
 		ColumnInfo colRadio = null;
 		for (ColumnInfo ci : columnas) {
 			if (ci.isRadiobutton()) {
@@ -306,43 +306,44 @@ public class DataTableTag extends HtmlEscapingAwareTag {
 		}
 		Assert.notNull(colRadio, "Debe exitir una columna de radiobotones para usar la botonera");
 
-		//Error si no hay selección de fila
+		// Error si no hay selección de fila
 		RequestContext rc = getRequestContext();
 		MessageSource ms = rc.getMessageSource();
 		Locale locale = rc.getLocale();
 
 		String textoAlert = ms.getMessage("monet.SeleccionaFila", null, "Please, select a row", locale);
 
-		//Creo el tableTool con los botones del datatable
+		// Creo el tableTool con los botones del datatable
 		StringBuffer text = new StringBuffer(512);
 		text.append("{ \"aButtons\": [");
 		for (ButtonInfo bi : botones) {
-			text.append("{ \"sExtends\": \"monet_owner\", \"sButtonText\": \"").append(ms.getMessage(bi.getLabel(), null, bi.getLabel(), locale))
-			    .append("\",\"fnClick\": function( nButton, oConfig ) {var opc = $(\"input[name='").append(colRadio.getNameRadiobutton())
-			    .append("']:checked\").val(); if(opc == undefined) { alert(\"").append(textoAlert).append("\"); } else { ").append(bi.getFunction())
-			    .append("(opc);}}},");
+			text.append("{ \"sExtends\": \"monet_owner\", \"sButtonText\": \"")
+					.append(ms.getMessage(bi.getLabel(), null, bi.getLabel(), locale))
+					.append("\",\"fnClick\": function( nButton, oConfig ) {var opc = $(\"input[name='")
+					.append(colRadio.getNameRadiobutton()).append("']:checked\").val(); if(opc == undefined) { alert(\"")
+					.append(textoAlert).append("\"); } else { ").append(bi.getFunction()).append("(opc);}}},");
 		}
 		return StringUtils.removeEnd(text.toString(), ",") + "]}";
 	}
 
 	/**
 	 * Comprobamos si los datos necesitan o no paginación, por tener menos de 10 elementos.
-	 *
+	 * 
 	 * @return Si hay 10 o menos filas, no mostramos la paginación.
-	 *
+	 * 
 	 * @throws JspException Error al leer los datos de la tabla.
 	 */
 	private Boolean hasPaginacion() throws IOException {
 		ObjectMapper om = new ObjectMapper();
-		JsonNode lista = om.readValue((String)jsonData, JsonNode.class);
+		JsonNode lista = om.readValue((String) jsonData, JsonNode.class);
 		return lista.size() > 10;
 	}
 
 	/**
 	 * Escribe el contenido de la tabla a través de una plantilla de Freemarker.
-	 *
+	 * 
 	 * @param tagWriter El writer donde escribir la salida.
-	 *
+	 * 
 	 * @throws JspExcepcion Error al renderizar la tabla.
 	 */
 	private void writeDataTable() throws JspException, IOException {

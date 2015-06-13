@@ -43,7 +43,7 @@ public class CalendarTag extends InputMonetTag implements FormatAnnotationTag {
 	/** Atributo de formato de la fecha */
 	private static final String DATE_FORMAT_ATTRIBUTE = "dateFormat";
 
-	/** Atributo de formato de la hora*/
+	/** Atributo de formato de la hora */
 	private static final String TIME_FORMAT_ATTRIBUTE = "timeFormat";
 
 	/** Atributo de fecha mínima en el calendario */
@@ -66,9 +66,9 @@ public class CalendarTag extends InputMonetTag implements FormatAnnotationTag {
 
 	/**
 	 * Implementa el interface para obtener la anotación de formato para un m:calendar.
-	 *
+	 * 
 	 * @param annotationList Lista de anotaciones del atributo.
-	 *
+	 * 
 	 * @return La anotación de formato o null, si no la hay.
 	 */
 	@Override
@@ -85,7 +85,7 @@ public class CalendarTag extends InputMonetTag implements FormatAnnotationTag {
 
 	/**
 	 * Establece el valor del atributo '<code>changeMonth</code>'. Puede ser una expresión regular.
-	 *
+	 * 
 	 * @param changeMonth Flag para activar el selector de mes.
 	 */
 	public void setChangeMonth(String changeMonth) throws JspException {
@@ -94,7 +94,7 @@ public class CalendarTag extends InputMonetTag implements FormatAnnotationTag {
 
 	/**
 	 * Establece el valor del atributo '<code>changeYear</code>'. Puede ser una expresión regular.
-	 *
+	 * 
 	 * @param changeYear Flag para activar el selector de año.
 	 */
 	public void setChangeYear(String changeYear) throws JspException {
@@ -103,7 +103,7 @@ public class CalendarTag extends InputMonetTag implements FormatAnnotationTag {
 
 	/**
 	 * Establece el valor del atributo '<code>iconTrigger</code>'. Puede ser una expresión regular.
-	 *
+	 * 
 	 * @param iconTrigger Flag para activar el calendario como trigger de la capa.
 	 */
 	public void setIconTrigger(String iconTrigger) throws JspException {
@@ -112,25 +112,25 @@ public class CalendarTag extends InputMonetTag implements FormatAnnotationTag {
 
 	/**
 	 * Establece el valor del atributo '<code>maxDate</code>'. Puede ser una expresión regular.
-	 *
+	 * 
 	 * @param maxDate Fecha máxima permitida en el calendario.
 	 */
 	public void setMaxDate(String maxDate) throws JspException {
-		this.maxDate = (String)evaluate(MAXDATE_ATTRIBUTE, maxDate);
+		this.maxDate = (String) evaluate(MAXDATE_ATTRIBUTE, maxDate);
 	}
 
 	/**
 	 * Establece el valor del atributo '<code>minDate</code>'. Puede ser una expresión regular.
-	 *
+	 * 
 	 * @param minDate Fecha mínima permitida en el calendario.
 	 */
 	public void setMinDate(String minDate) throws JspException {
-		this.minDate = (String)evaluate(MINDATE_ATTRIBUTE, minDate);
+		this.minDate = (String) evaluate(MINDATE_ATTRIBUTE, minDate);
 	}
 
 	/**
 	 * Establece el valor del atributo '<code>numberOfMonths</code>'. Puede ser una expresión regular.
-	 *
+	 * 
 	 * @param numberOfMonths Número de meses que mostrará el calendario.
 	 */
 	public void setNumberOfMonths(String numberOfMonths) throws JspException {
@@ -139,16 +139,16 @@ public class CalendarTag extends InputMonetTag implements FormatAnnotationTag {
 
 	/**
 	 * Escribe el tag '<code>input</code>' en el {@link TagWriter}.
-	 *
+	 * 
 	 * @param tagWriter Writer para el renderizado.
-	 *
+	 * 
 	 * @throws JspException Error al renderizar la salida sobre el writer.
 	 */
 	@Override
 	protected int writeTagContent(TagWriter tagWriter) throws JspException {
 		if (!novalidate) {
-			//Si no trae un format annotation de algún tipo, no podemos crear el calendar con un formato compatible,
-			//pues un constructor para Date o DateTime no siempre existe con distintos locales.
+			// Si no trae un format annotation de algún tipo, no podemos crear el calendar con un formato compatible,
+			// pues un constructor para Date o DateTime no siempre existe con distintos locales.
 			Annotation formatAnnotation = getFormatAnnotation(annotationFormatList);
 
 			if (formatAnnotation != null) {
@@ -156,45 +156,47 @@ public class CalendarTag extends InputMonetTag implements FormatAnnotationTag {
 				tagWriter.startTag("script");
 				tagWriter.writeOptionalAttributeValue("type", "text/javascript");
 
-				//Los datos para el template
+				// Los datos para el template
 				Map<String, Object> data = new HashMap<String, Object>();
 
-				//Identificador del input para linkarlo con el calendar
+				// Identificador del input para linkarlo con el calendar
 				data.put("id", resolveId());
 
-				//Si la fecha mínima está vacía y existe una anotación de future, ponemos minDate a 0 para que la fecha seleccionada sea futura.
+				// Si la fecha mínima está vacía y existe una anotación de future, ponemos minDate a 0 para que la fecha seleccionada sea
+				// futura.
 				String minimaDate = StringUtils.defaultString(minDate);
 				if (minimaDate.isEmpty() && hasFutureAnnotation(annotationFormatList)) {
 					minimaDate = "+1d";
 				}
 				data.put(MINDATE_ATTRIBUTE, minimaDate);
 
-				//Si la fecha máxima está vacía y existe una anotación de past, ponemos maxDate a 0 para que la fecha seleccionada sea pasada.
+				// Si la fecha máxima está vacía y existe una anotación de past, ponemos maxDate a 0 para que la fecha seleccionada sea
+				// pasada.
 				String maximaDate = StringUtils.defaultString(maxDate);
 				if (maximaDate.isEmpty() && hasPastAnnotation(annotationFormatList)) {
 					maximaDate = "0";
 				}
 				data.put(MAXDATE_ATTRIBUTE, maximaDate);
 
-				//Formato para el calendar, de acuerdo con la anotación.
+				// Formato para el calendar, de acuerdo con la anotación.
 				String[] format = getFormatUpdated(formatAnnotation);
 				data.put(DATE_FORMAT_ATTRIBUTE, format[0]);
 				data.put(TIME_FORMAT_ATTRIBUTE, format[1]);
 
-				//Selector de mes y año
+				// Selector de mes y año
 				data.put(CHANGE_MONTH_ATTRIBUTE, changeMonth.toString());
 				data.put(CHANGE_YEAR_ATTRIBUTE, changeYear.toString());
 
-				//Número de meses a mostrar
+				// Número de meses a mostrar
 				data.put(NUMBER_OF_MONTHS_ATTRIBUTE, numberOfMonths);
 
-				//¿Se levantará el calendario al pinchar en el icono del calendar o al entrar en el input?
+				// ¿Se levantará el calendario al pinchar en el icono del calendar o al entrar en el input?
 				data.put(ICON_TRIGGER_ATTRIBUTE, iconTrigger.toString());
 				if (iconTrigger) {
-					setSize("16");  //Para el hueco del icono
+					setSize("16"); // Para el hueco del icono
 				}
 
-				//El idioma inglés es el de defecto, no ponemos 'en', sino, '' 
+				// El idioma inglés es el de defecto, no ponemos 'en', sino, ''
 				Locale locale = getRequestContext().getLocale();
 				if (locale.equals(Locale.ENGLISH)) {
 					data.put("locale", StringUtils.EMPTY);
@@ -218,15 +220,15 @@ public class CalendarTag extends InputMonetTag implements FormatAnnotationTag {
 
 	/**
 	 * Obtiene el formato del DateTimeFormat adaptado al datepicker de jQuery.
-	 *
+	 * 
 	 * @param pattern Patrón de la anotación.
-	 *
+	 * 
 	 * @return Formato a utilizar en el input para mostrar el calendario.
 	 */
 	private String[] getFormatUpdated(Annotation a) {
 		Assert.isAssignable(DateTimeFormat.class, a.getClass());
 
-		DateTimeFormat dtfAnnotation = (DateTimeFormat)a;
+		DateTimeFormat dtfAnnotation = (DateTimeFormat) a;
 
 		String pattern = MetadataParserFormatAnnotation.getPattern(dtfAnnotation);
 
@@ -235,9 +237,9 @@ public class CalendarTag extends InputMonetTag implements FormatAnnotationTag {
 
 	/**
 	 * Comprueba si entre la lista de anotaciones está {@link javax.validation.constraints.Future}.
-	 *
+	 * 
 	 * @param annotationList Lista de anotaciones del campo.
-	 *
+	 * 
 	 * @return True, si está la anotación {@link javax.validation.constraints.Future}; false, en otro caso.
 	 */
 	private boolean hasFutureAnnotation(List<Annotation> annotationList) {
@@ -253,9 +255,9 @@ public class CalendarTag extends InputMonetTag implements FormatAnnotationTag {
 
 	/**
 	 * Comprueba si entre la lista de anotaciones está {@link javax.validation.constraints.Past}.
-	 *
+	 * 
 	 * @param annotationList Lista de anotaciones del campo.
-	 *
+	 * 
 	 * @return True, si está la anotación {@link javax.validation.constraints.Past}; false, en otro caso.
 	 */
 	private boolean hasPastAnnotation(List<Annotation> annotationList) {
@@ -272,18 +274,18 @@ public class CalendarTag extends InputMonetTag implements FormatAnnotationTag {
 	/**
 	 * Convertimos un pattern de java a otro de javascript válido para jQuery. Las posibilidades son:
 	 * <ul>
-	 * <li>Y/y: year       -> y: year</li>
-	 * <li>M: month        -> m: month</li>
-	 * <li>d: day          -> d: day</li>
-	 * <li>H/h: hour       -> h: hour</li>
-	 * <li>m: minutes      -> m: minutes</li>
-	 * <li>s: seconds      -> s: seconds</li>
+	 * <li>Y/y: year -> y: year</li>
+	 * <li>M: month -> m: month</li>
+	 * <li>d: day -> d: day</li>
+	 * <li>H/h: hour -> h: hour</li>
+	 * <li>m: minutes -> m: minutes</li>
+	 * <li>s: seconds -> s: seconds</li>
 	 * <li>S: milliseconds -> l: millis</li>
-	 * <li>Z: zone         -> z: zone</li>
+	 * <li>Z: zone -> z: zone</li>
 	 * </ul>
-	 *
+	 * 
 	 * @param pattern El pattern de java.
-	 *
+	 * 
 	 * @return El pattern del dateFormat y del timeFormat.
 	 */
 	private String[] pattern2Js(String pattern) {
@@ -345,6 +347,6 @@ public class CalendarTag extends InputMonetTag implements FormatAnnotationTag {
 		// - Reemplazamos la hora, la zona y los milisegundos
 		time = time.replaceAll("SSS", "l").replace('H', 'h').replace('Z', 'z');
 
-		return new String[] {date, time};
+		return new String[] { date, time };
 	}
 }

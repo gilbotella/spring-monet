@@ -35,14 +35,14 @@ public class InputMonetTag extends InputTag implements FormatAnnotationTag {
 
 	/**
 	 * Finalizamos el renderizado del tag. Liberamos los atributos rellenos en la carga.
-	 *
+	 * 
 	 * @return El end tag del padre.
-	 *
+	 * 
 	 * @throws JspException Error al cerrar el tag.
 	 */
 	@Override
 	public int doEndTag() throws JspException {
-		//Liberamos la información recogida
+		// Liberamos la información recogida
 		annotationFormatList = null;
 		metadataList = null;
 
@@ -51,9 +51,9 @@ public class InputMonetTag extends InputTag implements FormatAnnotationTag {
 
 	/**
 	 * Obtiene, de la lista de anotaciones del campo, la correspondiente al formato.
-	 *
+	 * 
 	 * @param annotationList Lista de anotaciones del atributo.
-	 *
+	 * 
 	 * @return La anotación de formato, o null, si no hay ninguna.
 	 */
 	@Override
@@ -70,7 +70,7 @@ public class InputMonetTag extends InputTag implements FormatAnnotationTag {
 
 	/**
 	 * Establece el valor del atributo '<code>novalidate</code>'. Puede ser una expresión regular.
-	 *
+	 * 
 	 * @param novalidate True, para que no se hagan validaciones en cliente; false, (valor por defecto) sí se hacen.
 	 */
 	public void setNovalidate(String novalidate) throws JspException {
@@ -79,7 +79,7 @@ public class InputMonetTag extends InputTag implements FormatAnnotationTag {
 
 	/**
 	 * Utilizamos el método de la creación del TagWriter para inicializar la información del metadata.
-	 *
+	 * 
 	 * @return El writer del componente.
 	 */
 	@Override
@@ -95,7 +95,7 @@ public class InputMonetTag extends InputTag implements FormatAnnotationTag {
 
 	/**
 	 * Sobreescribo el cssClass que es donde va a ir la validación de jquery utilizando metada.
-	 *
+	 * 
 	 * @return El estilo y la validación jquery del input.
 	 */
 	@Override
@@ -103,7 +103,7 @@ public class InputMonetTag extends InputTag implements FormatAnnotationTag {
 		String cssClass = super.getCssClass();
 		if (!novalidate) {
 			try {
-				//Añadimos las validaciones jquery de cliente
+				// Añadimos las validaciones jquery de cliente
 				String c = getClassFromMetadata(metadataList);
 				cssClass = StringUtils.defaultString(cssClass) + " " + c;
 			} catch (JspException je) {
@@ -115,7 +115,7 @@ public class InputMonetTag extends InputTag implements FormatAnnotationTag {
 
 	/**
 	 * Sobreescribo el cssErrorClass que es donde va a ir la validación de jquery utilizando metada.
-	 *
+	 * 
 	 * @return El estilo y la validación jquery del input.
 	 */
 	@Override
@@ -123,7 +123,7 @@ public class InputMonetTag extends InputTag implements FormatAnnotationTag {
 		String cssErrorClass = StringUtils.defaultString(super.getCssErrorClass()) + " error ";
 		if (!novalidate) {
 			try {
-				//Añadimos las validaciones jquery de cliente
+				// Añadimos las validaciones jquery de cliente
 				String c = getClassFromMetadata(metadataList);
 				cssErrorClass += c;
 			} catch (JspException je) {
@@ -134,18 +134,18 @@ public class InputMonetTag extends InputTag implements FormatAnnotationTag {
 	}
 
 	/**
-	 * Get the model attribute description which represents this <code>input</code> tag.
-	 * With this object, you will be able to get both the data type and annotations in order to add client side validations.
-	 *
+	 * Get the model attribute description which represents this <code>input</code> tag. With this object, you will be able to get both the
+	 * data type and annotations in order to add client side validations.
+	 * 
 	 * @return Model attribute description for this tag.
-	 *
+	 * 
 	 * @throws JspException Error al obtener la lista de metadatas de un campo.
 	 */
 	protected TypeDescriptor getTypeDescriptor() throws JspException {
 		// Objeto relleno tras el bind
 		BindStatus bs = getBindStatus();
 
-		BeanWrapper accessor = PropertyAccessorFactory.forBeanPropertyAccess(((BindingResult)bs.getErrors()).getTarget());
+		BeanWrapper accessor = PropertyAccessorFactory.forBeanPropertyAccess(((BindingResult) bs.getErrors()).getTarget());
 
 		// Y la expresión indica el campo.
 		String id = bs.getExpression();
@@ -154,23 +154,23 @@ public class InputMonetTag extends InputTag implements FormatAnnotationTag {
 
 	/**
 	 * Escribe el span donde se coloca el error del campo. El id será el del input más '_error'.
-	 *
+	 * 
 	 * @param tagWriter Writer para el renderizado.
-	 *
+	 * 
 	 * @throws JspException Error al renderizar la salida sobre el writer.
 	 */
 	protected void writeSpanDeError(TagWriter tagWriter) throws JspException {
 		tagWriter.startTag("span");
 		tagWriter.writeOptionalAttributeValue("id", resolveId() + "_error");
-		tagWriter.appendValue(" ");  //Si no en IE8 no funciona...
+		tagWriter.appendValue(" "); // Si no en IE8 no funciona...
 		tagWriter.endTag();
 	}
 
 	/**
 	 * Escribe el tag '<code>input</code>' en el {@link TagWriter}.
-	 *
+	 * 
 	 * @param tagWriter Writer para el renderizado.
-	 *
+	 * 
 	 * @throws JspException Error al renderizar la salida sobre el writer.
 	 */
 	@Override
@@ -190,13 +190,13 @@ public class InputMonetTag extends InputTag implements FormatAnnotationTag {
 	 * <li>{@link javax.validation.constraints.Future}</li>
 	 * <li>{@link org.springframework.format.annotation.NumberFormat NumberFormat}</li>
 	 * </ol>
-	 *
+	 * 
 	 * @return La anotación de formato
 	 * @see DateTimeFormat
 	 * @see NumberFormat
 	 * @see Past
 	 * @see Future
-	 *
+	 * 
 	 * @throws JspException Error al obtener el tipo y las anotaciones del campo.
 	 */
 	private List<Annotation> getAnnotationFormatList() throws JspException {
@@ -204,8 +204,8 @@ public class InputMonetTag extends InputTag implements FormatAnnotationTag {
 
 		TypeDescriptor typeDescriptor = getTypeDescriptor();
 		for (Annotation a : typeDescriptor.getAnnotations()) {
-			if (a.annotationType().isAssignableFrom(DateTimeFormat.class) || a.annotationType().isAssignableFrom(Past.class) ||
-			      a.annotationType().isAssignableFrom(Future.class) || a.annotationType().isAssignableFrom(NumberFormat.class)) {
+			if (a.annotationType().isAssignableFrom(DateTimeFormat.class) || a.annotationType().isAssignableFrom(Past.class)
+					|| a.annotationType().isAssignableFrom(Future.class) || a.annotationType().isAssignableFrom(NumberFormat.class)) {
 				annotationList.add(a);
 			}
 		}
@@ -214,9 +214,9 @@ public class InputMonetTag extends InputTag implements FormatAnnotationTag {
 
 	/**
 	 * Obtenemos el metadata que se va a colocar en el class para la validación en cliente.
-	 *
+	 * 
 	 * @return El class (json) para la validación en cliente.
-	 *
+	 * 
 	 * @throws JspException Error al gererar el metadata.
 	 */
 	private String getClassFromMetadata(List<Metadata> metas) throws JspException {
@@ -244,9 +244,9 @@ public class InputMonetTag extends InputTag implements FormatAnnotationTag {
 
 	/**
 	 * Obtiene la lista de condiciones que se van a aplicar a partir de las anotaciones y del tipo de dato.
-	 *
+	 * 
 	 * @return Lista de comprobaciones que deberán serializarse en json para la parte cliente.
-	 *
+	 * 
 	 * @throws JspException Error al obtener la lista de metadatas de un campo.
 	 */
 	private List<Metadata> getMetadata(Annotation formatAnnotation) throws JspException {
@@ -254,13 +254,13 @@ public class InputMonetTag extends InputTag implements FormatAnnotationTag {
 
 		List<Metadata> metas = new ArrayList<Metadata>();
 
-		//Añadimos los metadatas asociados al tipo del dato
+		// Añadimos los metadatas asociados al tipo del dato
 		List<Metadata> mds = MetadataParser.getMetadatasFromType(typeDescriptor.getType(), formatAnnotation);
 		if (mds != null) {
 			metas.addAll(mds);
 		}
 
-		//Añadimos los metadatas asociados a las anotaciones
+		// Añadimos los metadatas asociados a las anotaciones
 		for (Annotation a : typeDescriptor.getAnnotations()) {
 			CollectionUtils.addIgnoreNull(metas, MetadataParser.getMetadata(a, typeDescriptor.getType()));
 		}
@@ -270,10 +270,10 @@ public class InputMonetTag extends InputTag implements FormatAnnotationTag {
 
 	/**
 	 * Elimina un caracter por el final
-	 *
+	 * 
 	 * @param sb Buffer cona cadena.
 	 * @param car El caracter a eliminar por el final.
-	 *
+	 * 
 	 * @return La cadena sin el caracter.
 	 */
 	private StringBuffer removeEnd(StringBuffer sb, Character car) {

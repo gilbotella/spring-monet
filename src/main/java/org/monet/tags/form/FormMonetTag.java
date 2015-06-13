@@ -4,7 +4,6 @@ import freemarker.template.*;
 import java.io.IOException;
 import java.util.*;
 import javax.servlet.jsp.JspException;
-
 import org.monet.freemarker.FreemarkerParser;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
@@ -25,11 +24,11 @@ public class FormMonetTag extends FormTag {
 
 	/**
 	 * Escribe la salida del componente form.
-	 *
+	 * 
 	 * @param tagWriter El writer para el renderizado.
-	 *
+	 * 
 	 * @return {@link javax.servlet.jsp.tagext.Tag#EVAL_BODY_INCLUDE}
-	 *
+	 * 
 	 * @throws JspException Error al renderizar el formulario.
 	 */
 	@Override

@@ -16,7 +16,7 @@ public class DataTableData implements Serializable {
 	private Logger log = LoggerFactory.getLogger(getClass());
 
 	private List<?> aaData;
-	
+
 	public DataTableData(List<?> aaData) {
 		this.aaData = aaData;
 	}

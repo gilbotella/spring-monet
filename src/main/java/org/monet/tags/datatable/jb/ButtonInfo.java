@@ -12,7 +12,7 @@ public class ButtonInfo implements Serializable {
 
 	/**
 	 * Crea nu nuevo botón para la tabla
-	 *
+	 * 
 	 * @param label Label del botón
 	 * @param function Función que se ejecutará al hacer click.
 	 */
@@ -23,7 +23,7 @@ public class ButtonInfo implements Serializable {
 
 	/**
 	 * Obtiene la función a ejecutar.
-	 *
+	 * 
 	 * @return función a ejecutar
 	 */
 	public String getFunction() {
@@ -32,7 +32,7 @@ public class ButtonInfo implements Serializable {
 
 	/**
 	 * Obtiene el label de botón. Puede ser una etiqueta.
-	 *
+	 * 
 	 * @return Label del botón.
 	 */
 	public String getLabel() {

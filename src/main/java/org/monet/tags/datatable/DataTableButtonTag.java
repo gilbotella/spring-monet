@@ -37,16 +37,16 @@ public class DataTableButtonTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Al inicio del tag, validamos que esté bajo un datatable. Guardamos los valores en el datatable para generar la salida al final.
-	 *
+	 * 
 	 * @return Continúa con el resto de componentes.
-	 *
+	 * 
 	 * @throws JspException Error al parsear un botón del pie de la tabla.
 	 */
 	@Override
 	public int doStartTagInternal() {
 		Assert.notNull(findAncestorWithClass(this, DataTableButtonsTag.class), "El tag dtButton debe ser descendiente del tag dtButtons");
 
-		dataTable = (DataTableTag)findAncestorWithClass(this, DataTableTag.class);
+		dataTable = (DataTableTag) findAncestorWithClass(this, DataTableTag.class);
 
 		Assert.notNull(dataTable, "El tag dtButton debe ser descendiente del tag datatable");
 
@@ -57,7 +57,7 @@ public class DataTableButtonTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Establece la función a ejecutar cuando se selecciona el botón.
-	 *
+	 * 
 	 * @param function Función que se lanzará al pinchar sobre el botón.
 	 */
 	public void setFunction(String function) throws JspException {
@@ -66,7 +66,7 @@ public class DataTableButtonTag extends HtmlEscapingAwareTag {
 
 	/**
 	 * Establece el label del botón.
-	 *
+	 * 
 	 * @param label El texto del botón. Puede ser una etiqueta.
 	 */
 	public void setLabel(String label) throws JspException {
